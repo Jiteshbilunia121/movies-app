@@ -1,0 +1,64 @@
+{% extends 'home/base.html' %}
+
+{% block js %}
+<script>
+    $('.special.cards .image').dimmer({
+        on: 'hover'
+    });
+</script>
+{% endblock js %}
+
+{% block body %}
+<div class="container-fluid mb-5">
+    <div class="mx-4 my-5">
+        <a class="ui floating labeled icon button" href="{% url 'create' %}">
+            <i class="upload icon"></i>
+            Add Movie
+        </a>
+        <div class=" ui floating labeled icon dropdown button dropdown-toggle" id="sort" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="filter icon"></i>
+            Sort
+        </div>
+        <ul class="dropdown-menu dropdown-menu" aria-labelledby="sort">
+            <li><a class="dropdown-item" href="{% url 'sort' 'title' %}">Title</a></li>
+            <li><a class="dropdown-item" href="{% url 'sort' 'release_date' %}">Release date</a></li>
+            <li><a class="dropdown-item" href="{% url 'sort' 'watch_count' %}">Watch Count</a></li>
+        </ul>
+    </div>
+
+    <div class="row">
+        {% for movie in movies %}
+        <div class="col-auto mx-auto mb-5">
+            <div class="ui special cards">
+                <div class="card">
+                    <div class="blurring dimmable image">
+                        <div class="ui dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <a class="ui inverted button" href="{% url 'detail' movie.id %}">Visit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="{{movie.image}}" />
+                    </div>
+                    <div class="content">
+                        <div class="header">{{movie.title}}</div>
+                        <div class="meta">
+                            <span class="date">{{movie.release_date}}</span>
+                        </div>
+                        <div class="description">
+                            {{movie.description|truncatechars:75}}
+                        </div>
+                        <div class="ui pointing label">
+                            Rating {{movie.rating}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock body %}

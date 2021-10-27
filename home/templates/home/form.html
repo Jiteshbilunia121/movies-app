@@ -1,0 +1,14 @@
+{% extends 'home/base.html' %}
+
+{% block body %}
+
+<div class="container my-5">
+    <div class="form-group">
+        <form action="" method="POST">
+            {% csrf_token %} {{form.as_p}}
+            <input class="btn btn-primary btn-sm" type="submit" name="submit" />
+        </form>
+    </div>
+</div>
+
+{%endblock%}

@@ -1,0 +1,1 @@
+web: gunicorn moiveorg.wsgi --log-file -

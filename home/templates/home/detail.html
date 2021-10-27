@@ -1,0 +1,37 @@
+{% extends 'home/base.html' %} {% block body %}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-6 mx-auto mb-5">
+            <h1>{{detail.title}}</h1>
+            <hr />
+            <div class="ui blue label">
+                Rating
+                <div class="detail">{{detail.rating}}</div>
+            </div>
+            <h3 class="ui header">
+                <span class="date">{{detail.release_date}}</span>
+            </h3>
+            <p>{{detail.description}}</p>
+
+            {% for tags in detail.tags.all %}
+            <div class="ui orange circular label my-1">{{tags}}</div>
+            {% endfor %}
+
+            <div class="mt-5">
+                <a class="ui button" href="{% url 'play' detail.id %}">
+                    <i class="play icon"></i>
+                    {{detail.watch_count}} Watch
+                </a>
+            </div>
+        </div>
+
+        <div class="col-6 mx-auto mb-5">
+            <img class="ui medium rounded image" src="{{detail.image}}" />
+        </div>
+    </div>
+
+    <a class="tiny ui green basic button" href="{% url 'update' detail.id %}">Edit</a>
+    <a class="tiny ui red basic button" href="{% url 'delete' detail.id %}">Delete</a>
+</div>
+{% endblock body %}
